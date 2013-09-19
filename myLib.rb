@@ -137,7 +137,11 @@ end
 
 # config laden
 def loadConfig()
-	fn = File.dirname(File.expand_path(__FILE__)) + '/config.yml'
+	if getOS() == "MAC_OS_X" || getOS() == "Linux" || getOS() == "Solaris"
+		fn = File.dirname(File.expand_path(__FILE__)) + '/config.yml'
+	else
+		fn = File.dirname(File.expand_path(__FILE__)) + '\\config.yml'
+	end
 	loadConfig = YAML::load(File.open(fn))
 end
 
