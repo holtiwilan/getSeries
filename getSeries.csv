@@ -1,0 +1,10 @@
+#Hier werden die Seriennamen eingetragen, die gesucht werden sollen.
+#Beim ersten eintragen reicht der Name der Serie
+#Die weiteren Informationen fügt das Script dazuund ersetzt die Leerzeichen durch punkte
+#
+# Struktur:
+# Name der Serie; Staffel;Folge;letzte gefundene Qualität;Versuche bei denen nur xvid gefunden wurde
+# Beispiele:
+# Breaking.In;03;01;xvid;0
+# Elementary;01;14;720p;0
+

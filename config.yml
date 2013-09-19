@@ -1,0 +1,27 @@
+pyloadlient: /opt/local/bin/python2.6 /MyApps/pyload/pyload/pyLoadCli.py
+downdir:     /Users/Tim/Download/pyload/
+pyloadstart: /MyApps/pyload/start.sh
+
+unrarContent:
+  logfile:     /MyApps/LOG/unrarContent.txt
+  downdir:     /Users/Tim/Download/pyload/
+  tempfile:    /MyApps/Temp/queue.txt
+  unrarcall:   unrar e -y -pmovie-blog.org
+  
+getSeries:
+  logfile:      /MyApps/LOG/getSeries.txt
+  baseurl:      http://www.movie-blog.org/index.php?s=
+  searchfile:   /Medien/getSeries.csv
+  searchSuffix: +German+Dubbed #nur Deutsche Serien laden
+ 
+plex:
+  refresh: /Applications/Plex\ Media\ Server.app/Contents/MacOS/Plex\ Media\ Scanner --scan --deep --refresh --section
+  section:
+    Sandmann: 17
+    Maus: 18
+    Serien: 23
+    Movies: 22
+    
+pebble:
+  user: 
+  token:
