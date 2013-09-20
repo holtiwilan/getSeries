@@ -1,7 +1,18 @@
 pyloadlient: /opt/local/bin/python2.6 /MyApps/pyload/pyload/pyLoadCli.py
 downdir:     /Users/Tim/Download/pyload/
 pyloadstart: /MyApps/pyload/start.sh
+logdir:      /MyApps/LOG/
 
+mail:
+  from:                 'Tims Rubyscript <thebigh@dorado.uberspace.de>'
+  server:               dorado.uberspace.de
+  port:                 587
+  domian:               dorado.uberspace.de
+  user:                 
+  password:             
+  authentication:       plain
+  enable_starttls_auto: true
+  
 unrarContent:
   logfile:     /MyApps/LOG/unrarContent.txt
   downdir:     /Users/Tim/Download/pyload/
@@ -13,7 +24,23 @@ getSeries:
   baseurl:      http://www.movie-blog.org/index.php?s=
   searchfile:   /Medien/getSeries.csv
   searchSuffix: +German+Dubbed #nur Deutsche Serien laden
- 
+  
+getTopMovies:
+  logfile:       /MyApps/LOG/getTopMovies.txt
+  baseurl:       http://www.movie-blog.org/index.php?s=
+  moviefile:     /Medien/DownloadedTopMovies.csv
+  topreleaseurl: http://www.movie-blog.org/category/top-releases/
+  usenetlink:    surl.pf-control.de
+  
+mediathek_download:
+  logfile:      /MyApps/LOG/mediathek_download.txt
+  FolgenFile:   /Medien/Mediathek_download.txt
+  FilmlisteBZ2: /Medien/Filmliste.xml.bz2
+  FilmlisteXML: /Medien/Filmliste.xml
+  MedienDir:    /Medien/
+  wgetpath:     /usr/local/bin/wget
+  bzip2cmd:     bzip2 -df 
+  
 plex:
   refresh: /Applications/Plex\ Media\ Server.app/Contents/MacOS/Plex\ Media\ Scanner --scan --deep --refresh --section
   section:
@@ -25,3 +52,8 @@ plex:
 pebble:
   user: 
   token:
+    getSeries:     
+    getTopMovies:  
+    Kindercontent: 
+    Pebble:        
+    misc:          

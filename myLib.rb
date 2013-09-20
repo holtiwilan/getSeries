@@ -1,8 +1,17 @@
 #!/usr/bin/ruby
+############################################################################
+# Needed gems
+# mail - gem install mail
+#
+# config.yml is needed in same folder
+############################################################################
+require 'rubygems'
 require 'yaml'
 require 'rbconfig'
 require 'csv'
 require 'logger'
+require 'mail'
+require 'fileutils'
 
 $t=Time.now
 
@@ -22,6 +31,36 @@ def pushToPebble(sApp, sText)
 			# Hier müssen sich die Windowsuser was überlegen
 	  end
   end
+end
+
+#Sended Mails
+def sendMail(sReceiver, sSubject, sBody ,sFile)
+	log_info "Schicke #{sFile} an '#{sReceiver}"
+	Mail.defaults do
+	  delivery_method :smtp, { :address   => $cnf['mail']['server'],
+							   :port      => $cnf['mail']['port'],
+							   :domain    => $cnf['mail']['domain'],
+							   :user_name => $cnf['mail']['user'],
+							   :password  => $cnf['mail']['password'],
+							   :authentication => $cnf['mail']['authentication'],
+							   :enable_starttls_auto => $cnf['mail']['enable_starttls_auto'] }
+	end
+
+	mail = Mail.deliver do
+	  to sReceiver
+	  from $cnf['mail']['from']
+	  subject sSubject
+	  text_part do
+		body sBody
+	  end
+	  html_part do
+		content_type 'text/html; charset=UTF-8'
+		body sBody
+	  end
+	  if !isNullOrEmpty(sFile)
+	  	add_file sFile
+	  end
+	end
 end
 
 #erzeugt einen Logger
