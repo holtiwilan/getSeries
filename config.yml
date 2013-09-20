@@ -13,6 +13,10 @@ mail:
   authentication:       plain
   enable_starttls_auto: true
   
+send_to_Kindle:
+  mobi:          /Users/Tim/buch.mobi   #Tempfile für konvertierung
+  ebook_convert: /usr/bin/ebook-convert #executable zum konvertieren
+  
 unrarContent:
   logfile:     /MyApps/LOG/unrarContent.txt
   downdir:     /Users/Tim/Download/pyload/
