@@ -35,7 +35,7 @@ end
 
 #Sended Mails
 def sendMail(sReceiver, sSubject, sBody ,sFile)
-	log_info "Schicke #{sFile} an '#{sReceiver}"
+	log_info "Schicke Mail an #{sReceiver} mit Betreff #{sSubject}"
 	Mail.defaults do
 	  delivery_method :smtp, { :address   => $cnf['mail']['server'],
 							   :port      => $cnf['mail']['port'],
@@ -64,7 +64,7 @@ def sendMail(sReceiver, sSubject, sBody ,sFile)
 end
 
 #erzeugt einen Logger
-# es wird der Basename des Scripts übergeben
+# es wird der ename des Scripts übergeben
 def createLogger(sScript)
 	$sScript = sScript.gsub('.rb','')
 	$log = Logger.new($cnf['logdir'] + $sScript + "_" + $t.strftime("%Y%m%d")+'.txt') #Logfile
@@ -176,6 +176,27 @@ def isPyloadRunning()
 		# Hier müssen sich die Windowsuser was überlegen
 	end
 	isPyloadRunning = bIsRunning
+end
+
+#Prüfet, ob ein Verzeichnis existert und legt dieses an, wenn nciht vorhanden
+def checkDir(sPath)
+	checkDir = false
+	if File.exists?(sPath) && File.directory?(sPath)
+	 	log_info "Director #{sPath} exist, nothing to do here"
+  	checkDir = true
+	else
+  	sPath = "\"" + sPath + "\""
+  	log_info "Director #{sPath} does not exist, will create it"
+  	sCMD = "mkdir -p #{sPath}"
+		p sCMD
+		if system(sCMD)
+			checkDir = true
+			log_info "Director #{sPath} created!"
+		else
+			checkDir = false
+			log_error "Director #{sPath} creation failed!"
+		end
+	end
 end
 
 # Überprüft, ob in pyLoad fehlgeschlagene Downloads vorhanden sind.
